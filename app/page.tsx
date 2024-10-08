@@ -1,6 +1,4 @@
 "use client";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import Image from "next/image";
 import { IoSendSharp } from "react-icons/io5";
 
 
