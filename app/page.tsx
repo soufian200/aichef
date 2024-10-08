@@ -1,11 +1,14 @@
 "use client";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Image from "next/image";
+import { IoSendSharp } from "react-icons/io5";
+
 
 import { useEffect, useRef, useState } from "react";
 import { getAnswer } from "./actions/getAnswer";
 import rehypeRaw from "rehype-raw";
 import ReactMarkdown from "react-markdown";
+import { FaArrowDown } from "react-icons/fa";
 
 interface IChat{
   role: string,
@@ -13,10 +16,11 @@ interface IChat{
       content: string
 }
 export default function Home() {
-  
+  // "AIzaSyDZx46FIU7RS0t-vxEWBtIrvivVvwqzPIE"
 
   const [loading,setLoading] = useState(false);
   const [msg,setMsg] = useState("")
+  const [apikey,setApikey] = useState("")
     const [chat,setChat] = useState<IChat[]>([
     
   ])
@@ -36,7 +40,7 @@ export default function Home() {
 
     // TODO: MAKE AN API REQUEST
 
-    const res = await getAnswer(msg);
+    const res = await getAnswer(msg,apikey);
     // console.log(r);
     setChat((prevChat) => [...prevChat,  {
       role: "Chef",
@@ -65,7 +69,9 @@ export default function Home() {
       <h1 className="font-bold text-xl bg-white px-2 rounded-lg">AI <span className="text-green-400">Chef</span></h1>
       </div>
 
+
       <div className="bg-red-40 w-1/2 mx-auto">
+      <input placeholder="enter your Gemini APIKEY Here" className="p-2 rounded-lg w-96" value={apikey} onChange={(e)=>setApikey(e.target.value)} />
        {
         chat.map((chat,index)=> <div key={index} className="bg-gray-50 rounded-xl p-2 my-2">
           <div className="flex items-center">
@@ -86,7 +92,8 @@ export default function Home() {
       </div>
       
       </div>
-      <div className="bg-red-40 sticky w-full p-2 bottom-0">
+      
+      <div className="bg-red-40 sticky z-10 w-full p-2 bottom-0">
        <div className="flex justify-center ">
 
        <div className="bg-white rounded-xl w-1/2 overflow-hidden">
@@ -94,11 +101,20 @@ export default function Home() {
        </div>
         <button
         onClick={handleSendingMsg}
-        className="bg-green-500 ml-2 rounded-xl text-white px-2">
-          Send
+        className="bg-green-500 hover:bg-green-600  ml-2 rounded-xl text-white px-4">
+          <IoSendSharp />
         </button>
        </div>
        </div>
+       <div className="sticky flex flex-col  z-0 items-end pr-10 bottom-10 right-0 ">
+        <button onClick={scrollToBottom} className="w-10 h-10 flex items-center justify-center rounded-full bg-white hover:bg-gray-200 cursor-pointer">
+          <FaArrowDown />
+        </button>
+        {/* <div className="h-3"></div>
+        <button onClick={scrollToBottom} className="w-10 h-10 flex items-center justify-center rounded-full bg-white hover:bg-gray-200 cursor-pointer">
+          <FaArrowDown />
+        </button> */}
+      </div>
     </div>
   );
 }

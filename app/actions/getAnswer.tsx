@@ -1,10 +1,10 @@
 'use server';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-export async function getAnswer(q:string){
+export async function getAnswer(q:string,apikey:string){
     // console.log(process.env.API_KEY);
 
-    const genAI = new GoogleGenerativeAI("AIzaSyDZx46FIU7RS0t-vxEWBtIrvivVvwqzPIE");
+    const genAI = new GoogleGenerativeAI(apikey);
 
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
