@@ -38,3 +38,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ##screen shots
 ![alt text](https://github.com/soufian200/aichef/blob/main/app/screenshots/screen%201.png)
 ![alt text](https://github.com/soufian200/aichef/blob/main/app/screenshots/screen%202.png)
+
+##demo
+https://aichef-swart.vercel.app/
